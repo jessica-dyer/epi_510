@@ -3,7 +3,7 @@
 ##
 ## Purpose of script:
 ##
-## Author: 
+## Author: Susan Glenn
 ##
 ## Date Created: 
 ##
