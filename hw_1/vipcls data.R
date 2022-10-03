@@ -16,22 +16,13 @@
 
 ## Packages
 library(tidyverse)
-class(vipcls)
-data.frame()
-view(vipcls)
-names(vipcls)
-dim(vipcls)
-str(vipcls)
-summary(vipcls)
 
 ## Import data
 vipcls <- read.csv("vipcls.csv")
 
 ## Change WD to Epi 510
-current_wd = getwd()
-epi_wd = "/Repositories/epi_510/hw_1"
-wd = paste(current_wd, epi_wd, sep = "")
-setwd(paste(current_wd, epi_wd, sep=""))
+j_wd = "~/Repositories/epi_510/hw_1"
+setwd(j_wd)
 
 ## Create a dataframe: 
 vipcls <- data.frame(vipcls)
@@ -47,6 +38,9 @@ names(vipcls)
 
 ## Dimensions of data: 
 dim(vipcls)
+
+## Summary of data: 
+summary(vipcls)
 
 #Set missing data to NA
 vipcls[vipcls==-1] <- NA
