@@ -4,6 +4,8 @@
 - `git add .`
 - `git commit -m "I did stuff"`
 - `git push`
+- `git pull`
+- `git status`
 
 ## Command line 
 - Change directory: `cd `
