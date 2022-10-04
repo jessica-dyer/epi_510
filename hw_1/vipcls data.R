@@ -1,11 +1,11 @@
 ## ---------------------------
 ## Script name: Epi 510 HW 1
 ##
-## Purpose of script:
+## Purpose of script: Homework 1
 ##
 ## Author: Susan Glenn
 ##
-## Date Created: 
+## Date Created: 2022-10-03
 ##
 ## ---------------------------
 ##
