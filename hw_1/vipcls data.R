@@ -30,8 +30,9 @@ View(vipcls)
 ## Type of data:
 class(vipcls)
 
-## Names of fields:
-names(vipcls)
+## Names of fields: 
+column_names <- names(vipcls)
+print(column_names)
 
 ## Dimensions of data:
 dim(vipcls)
