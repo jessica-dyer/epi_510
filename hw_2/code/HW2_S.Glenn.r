@@ -1,0 +1,1 @@
+vipcls <- read.csv("/Users/susanglenn/Repositories/epi_510/hw_2/data/vipcls.csv")
