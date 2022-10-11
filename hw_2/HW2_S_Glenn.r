@@ -43,8 +43,8 @@ vipcls$momageCat <- ifelse(vipcls$momage <= 19, 1,
 ## Create smoke and drink variables
 ## This says: if cigs1 > 0, write the value 2, but if cigs2 is >0 write the value 3, otherwise, write 1. 
 ## That should take care of the logic for this question. 
-vipcls$smoke <- ifelse(vipcls$cigs1 >0, 2, 
-                       ifelse(vipcls$cigs2 > 0, 3, 1))
+vipcls$smoke <- ifelse(vipcls$cigs2 >0, 3, 
+                       ifelse(vipcls$cigs1 > 0, 2, 1))
 
 ## Date variables
 # There are 20 months/days/years that are NA, those won't parse and these participants won't have enroll_date
