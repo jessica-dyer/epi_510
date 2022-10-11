@@ -49,7 +49,7 @@ vipcls$smoke <- ifelse(vipcls$cigs1 >0, 2,
 ## Date variables
 # There are 20 months/days/years that are NA, those won't parse and these participants won't have enroll_date
 vipcls$enroll_date <- as_date(paste(vipcls$enryr, "-", vipcls$enrmo, "-", vipcls$enrdy, sep = ''))
-vipcls$delivery_date <- as_date(paste(vipcls$delyr, "-", vipcls$delmo, "-", vipcls$deldy, sep = '')) #610 don't have delivery info
+vipcls$delivery_date <- as_date(paste(vipcls$delyr, "-", vipcls$delmo, "-", vipcls$deldy, sep = '')) #610 don't have delivery date info
 vipcls$days_btwn_enroll_delivery <- vipcls$delivery_date - vipcls$enroll_date
 
 # Investigate which ptid has a delivery date prior to enrollment
