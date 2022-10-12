@@ -1,12 +1,12 @@
 ## ---------------------------
 ##
-## Script name: 
+## Script name: EPI 510 R Assignment 2
 ##
-## Purpose of script:
+## Purpose of script: Homework 2
 ##
-## Author: 
+## Author: Susan Glenn
 ##
-## Date Created: 
+## Date Created: 2022-10-11
 ##
 ## ---------------------------
 ##
