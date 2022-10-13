@@ -12,6 +12,8 @@
 ##
 ## Notes: Having trouble on:
 ##        1. Lines 64-66 - I'm not sure how to skip/drop levels 2 & 4, as there aren't corresponding clinic IDs.
+              ## You've done this correctly. However, there were some errors in the actual code that I fixed to make it work
+              ## Properly. 
 ##        2. Lines 88-89 - I'm not sure how to identify the patient ID with a delivery date prior to enrollment in base r.
 ##        3. Would implausible delivery dates (question 4e) just be anything over a normal days from pregnancy to delivery? (line 90)
 ##        4. All the variables I converted to categorical variables are listed as NA now (grade, deltype, induclab, etc.). Is this ok?
@@ -24,7 +26,8 @@ directory <- paste("~/Repositories/epi_510/", current_hw_folder, sep = '')
 setwd(directory)
 
 ## 1. Get data from HW 1
-rdsVersion <- readRDS(file = "vipcls.rds")
+vipcls <- readRDS(file = "~/Repositories/epi_510/vipcls.rds")
+
 
 ## 2. Define new categorical variables
 ## a. momage
@@ -62,7 +65,7 @@ vipcls$clinic[vipcls$patid>=7000000 & vipcls$patid <=7999999] <- 7
 vipcls$clinic[vipcls$patid>=8000000 & vipcls$patid <=8999999] <- 8
 vipcls$clinic[vipcls$patid>=9000000 & vipcls$patid <=9999999] <- 9
 vipcls$clinic <- factor(vipcls$clinic,
-  levels = 1,3,5,6:9,
+  levels = c(1,3,5,6:9),
   labels = c("Olympia", "Everett", "Seattle", "Bellingham", "Spokane", "Bellevue", "Tacoma"))
 
 ## 3. Create smoke and drink variables
@@ -84,10 +87,12 @@ head(vipcls$del_date)
 vipcls$del_date[grep("-1--1--1", vipcls$del_date)] <- NA
 vipcls$del_date <- as.Date(vipcls$del_date)
 ##c. days between enrollment and delivery
-enrollToDelDays <- difftime(vipcls$del_date, vipcls$enroll_date)
+vipcls$enrollToDelDays <- difftime(vipcls$del_date, vipcls$enroll_date)
 ##d. Investigate which ptid has a delivery date prior to enrollment
 ptid <- vipcls$patid[vipcls$enrollToDelDays < 0]
+ptid <- ptid[!is.na(ptid)]
 ##e. Set implausible number of days between enrollment and delivery to missing
+vipcls$enrollToDelDays[vipcls$enrollToDelDays < 0] <- NA  
 
 ## 5. Add labels to new categorical variables
 vipcls$raceth <- factor(vipcls$raceth, 
