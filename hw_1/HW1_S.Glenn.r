@@ -125,3 +125,6 @@ ordered_data <- vipcls[order(vipcls$bw), ]
 ## Find the 5 patient ids on the top
 ptid_lbw <- ordered_data$patid[0:5]
 print(ptid_lbw)
+
+#Save RDS
+saveRDS(vipcls, file = "vipcls.rds")
