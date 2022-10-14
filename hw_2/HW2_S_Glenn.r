@@ -9,16 +9,6 @@
 ## Date Created: 2022-10-11
 ##
 ## ---------------------------
-##
-## Notes: Having trouble on:
-##        1. Lines 64-66 - I'm not sure how to skip/drop levels 2 & 4, as there aren't corresponding clinic IDs.
-              ## You've done this correctly. However, there were some errors in the actual code that I fixed to make it work
-              ## Properly. 
-##        2. Lines 88-89 - I'm not sure how to identify the patient ID with a delivery date prior to enrollment in base r.
-##        3. Would implausible delivery dates (question 4e) just be anything over a normal days from pregnancy to delivery? (line 90)
-##        4. All the variables I converted to categorical variables are listed as NA now (grade, deltype, induclab, etc.). Is this ok?
-##
-## ---------------------------
 
 ## Set working directory
 current_hw_folder <- "hw_2"
@@ -89,10 +79,9 @@ vipcls$del_date <- as.Date(vipcls$del_date)
 ##c. days between enrollment and delivery
 vipcls$enrollToDelDays <- difftime(vipcls$del_date, vipcls$enroll_date)
 ##d. Investigate which ptid has a delivery date prior to enrollment
-ptid <- vipcls$patid[vipcls$enrollToDelDays < 0]
-ptid <- ptid[!is.na(ptid)]
+ptid <- vipcls[vipcls$enrollToDelDays < 0,]
 ##e. Set implausible number of days between enrollment and delivery to missing
-vipcls$enrollToDelDays[vipcls$enrollToDelDays < 0] <- NA  
+vipcls$enrollToDelDays[vipcls$enrollToDelDays <0] <- NA
 
 ## 5. Add labels to new categorical variables
 vipcls$raceth <- factor(vipcls$raceth, 
@@ -152,3 +141,6 @@ vipcls$smoke <- factor(vipcls$smoke,
 vipcls$drink <- factor(vipcls$drink,
                        levels = 1:3,
                        labels = c("never", "1st trimester only", "2nd tri w/ or w/o 1st tri"))
+
+#6. save as csv
+write.csv(vipcls, file = "HW2.csv", row.names = F)
