@@ -14,18 +14,18 @@
 library(tidyverse)
 
 ##Set working directory
-wd <- "/Users/susanglenn/Repositories/epi_510/hw_3/data/"
+wd <- "~/Repositories/epi_510/hw_3/"
 setwd(wd)
 
 ##1. Loop over and append these into a single data frame
 yearAppend <- NULL
 
 for (y in seq(1970, 2010, 10)) {
-  yearAppend <- rbind(yearAppend, read.csv(paste0(wd,"gbdChildMortality_", y, "s.csv")))
+  yearAppend <- rbind(yearAppend, read.csv(paste0(wd,"data/gbdChildMortality_", y, "s.csv")))
 }
 
 ##2. Read in “countryCovars.csv” and merge it to the data frame yearAppend, keeping all observations from the child mortality dataset and not keeping observations only found in the countryCovars dataset.
-countryCovars <- read.csv("countryCovars.csv")
+countryCovars <- read.csv("data/countryCovars.csv")
 glimpse(countryCovars)
 glimpse(yearAppend)
 yearAppend <- merge(yearAppend, countryCovars, by.x = "iso", by.y = "iso3", all.x = T, all.y = F)
@@ -35,8 +35,8 @@ yearAppend <- merge(yearAppend, countryCovars, by.x = "iso", by.y = "iso3", all.
 MR <- grep("MR", names(yearAppend))
 
 ##b. Use a for loop to loop over the variables in the object that you created in 3a. Have the loop make a histogram for each MR variable. 
-for (MR in 1:ncol(yearAppend)) {
-  hist(yearAppend[,MR])
+for (num in MR) {
+  hist(yearAppend[,num])
 }
 
 ##4. Use sapply functions to build a table of means and SDs.
