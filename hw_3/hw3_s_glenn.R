@@ -12,6 +12,7 @@
 
 ##Load packages
 library(tidyverse)
+library(gridExtra)
 
 ##Set working directory
 wd <- "~/Repositories/epi_510/hw_3/"
@@ -28,15 +29,16 @@ for (y in seq(1970, 2010, 10)) {
 countryCovars <- read.csv("data/countryCovars.csv")
 glimpse(countryCovars)
 glimpse(yearAppend)
-yearAppend <- merge(yearAppend, countryCovars, by.x = "iso", by.y = "iso3", all.x = T, all.y = F)
+
+yearAppend <- merge(yearAppend, countryCovars, by.x = c("iso", "year"), by.y = c("iso3", "year"), all.x = T, all.y = F)
 
 ##3. Make a histogram for each mortality rate variable, not typying out the variable list or copying and pasting the histogram code.
 ##a. a.	Use a grep command to find all of the variables that contain “MR” and assign these to an object.
-MR <- grep("MR", names(yearAppend))
+mortality_columns_vector <- grep("MR", names(yearAppend))
 
 ##b. Use a for loop to loop over the variables in the object that you created in 3a. Have the loop make a histogram for each MR variable. 
-for (num in MR) {
-  hist(yearAppend[,num])
+for (col_num in mortality_columns_vector) {
+  hist(yearAppend[,col_num])
 }
 
 ##4. Use sapply functions to build a table of means and SDs.
@@ -53,16 +55,15 @@ grid.table(meanSD)
 
 ##5. Practice using tapply to summarize a variable by levels of another variable.
 ##a. Use the tapply function to find the mean value of neoMR for each year.
-tapply(yearAppend$neoMR, yearAppend$year.x, mean, na.rm = TRUE)
+tapply(yearAppend$neoMR, yearAppend$year, mean, na.rm = TRUE)
 
 ##b. BONUS: Nest a tapply function inside of an sapply function to make a table that gives the mean value for each MR and Death variable in each year.  
 #meanbyyear <- data.frame(cbind(sapply(yearAppend[5:12], mean, na.rm = TRUE), tapply(yearAppend[5:12], yearAppend$year.x, mean, na.rm = TRUE)))
 columns <- names(yearAppend[5:12])
 means_by_year <- 
   yearAppend %>%
-  group_by(year.x) %>%
+  group_by(year) %>%
   summarise_at(vars(columns), mean)
 
-sapply()
 
 
