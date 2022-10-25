@@ -44,15 +44,25 @@ for (num in MR) {
 means <- sapply(yearAppend[5:12], mean, na.rm = TRUE)
 
 ##b. b.	Use an sapply function to find the SD for all MR and Death variables (i.e. columns 5 through 12). Assign the result to an object called “SDs”.
-SDs <- sapply(yearAppend[5:12], sd, na.rm = TRUE)
+standard_deviations <- sapply(yearAppend[5:12], sd, na.rm = TRUE)
 
 ##c. c.	Use a cbind function to combine the contents of “means” and “SDs” into a single table. 
-meanSD <- data.frame(cbind(means,SDs))
+meanSD <- data.frame(cbind(means,standard_deviations))
 names(meanSD) <- c("Mean", "SD")
+grid.table(meanSD)
 
 ##5. Practice using tapply to summarize a variable by levels of another variable.
 ##a. Use the tapply function to find the mean value of neoMR for each year.
 tapply(yearAppend$neoMR, yearAppend$year.x, mean, na.rm = TRUE)
 
 ##b. BONUS: Nest a tapply function inside of an sapply function to make a table that gives the mean value for each MR and Death variable in each year.  
-meanbyyear <- data.frame(cbind(sapply(yearAppend[5:12], mean, na.rm = TRUE), tapply(yearAppend[5:12], yearAppend$year.x, mean, na.rm = TRUE)))
+#meanbyyear <- data.frame(cbind(sapply(yearAppend[5:12], mean, na.rm = TRUE), tapply(yearAppend[5:12], yearAppend$year.x, mean, na.rm = TRUE)))
+columns <- names(yearAppend[5:12])
+means_by_year <- 
+  yearAppend %>%
+  group_by(year.x) %>%
+  summarise_at(vars(columns), mean)
+
+sapply()
+
+
