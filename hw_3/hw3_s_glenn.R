@@ -41,7 +41,7 @@ for (col_num in mortality_columns_vector) {
   png(paste("histogram_", col_num, ".png", sep = ""),
       width = 1000, height = 750)
   hist(yearAppend[,col_num], 
-       main = paste("Histogram of", names(yearAppend[5])))
+       main = paste("Histogram of", names(yearAppend[col_num])))
   dev.off()
 }
 
