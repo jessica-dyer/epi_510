@@ -38,8 +38,13 @@ mortality_columns_vector <- grep("MR", names(yearAppend))
 
 ##b. Use a for loop to loop over the variables in the object that you created in 3a. Have the loop make a histogram for each MR variable. 
 for (col_num in mortality_columns_vector) {
-  hist(yearAppend[,col_num])
+  png(paste("histogram_", col_num, ".png", sep = ""),
+      width = 1000, height = 750)
+  hist(yearAppend[,col_num], 
+       main = paste("Histogram of", names(yearAppend[5])))
+  dev.off()
 }
+
 
 ##4. Use sapply functions to build a table of means and SDs.
 ##a. a.	Use an sapply function to find the mean value for all MR and Death variables (i.e. columns 5 through 12). Assign the result to an object called “means”. 
