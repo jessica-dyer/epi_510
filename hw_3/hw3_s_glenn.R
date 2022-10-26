@@ -12,7 +12,6 @@
 
 ##Load packages
 library(tidyverse)
-library(gridExtra)
 
 ##Set working directory
 wd <- "~/Repositories/epi_510/hw_3/"
@@ -41,10 +40,9 @@ for (col_num in mortality_columns_vector) {
   png(paste("histogram_", col_num, ".png", sep = ""),
       width = 1000, height = 750)
   hist(yearAppend[,col_num], 
-       main = paste("Histogram of", names(yearAppend[col_num])))
+       main = paste("Histogram of", names(yearAppend[col_num])), xlab=names(yearAppend[col_num]))
   dev.off()
 }
-
 
 ##4. Use sapply functions to build a table of means and SDs.
 ##a. a.	Use an sapply function to find the mean value for all MR and Death variables (i.e. columns 5 through 12). Assign the result to an object called “means”. 
@@ -56,19 +54,12 @@ standard_deviations <- sapply(yearAppend[5:12], sd, na.rm = TRUE)
 ##c. c.	Use a cbind function to combine the contents of “means” and “SDs” into a single table. 
 meanSD <- data.frame(cbind(means,standard_deviations))
 names(meanSD) <- c("Mean", "SD")
-grid.table(meanSD)
 
 ##5. Practice using tapply to summarize a variable by levels of another variable.
 ##a. Use the tapply function to find the mean value of neoMR for each year.
 tapply(yearAppend$neoMR, yearAppend$year, mean, na.rm = TRUE)
 
 ##b. BONUS: Nest a tapply function inside of an sapply function to make a table that gives the mean value for each MR and Death variable in each year.  
-#meanbyyear <- data.frame(cbind(sapply(yearAppend[5:12], mean, na.rm = TRUE), tapply(yearAppend[5:12], yearAppend$year.x, mean, na.rm = TRUE)))
-columns <- names(yearAppend[5:12])
-means_by_year <- 
-  yearAppend %>%
-  group_by(year) %>%
-  summarise_at(vars(columns), mean)
+MRandDeathVarList <- c(grep("MR", names(yearAppend), value = T), grep("Deaths", names(yearAppend), value = T))
 
-
-
+sapply(MRandDeathVarList, function(x) {tapply(yearAppend[, x], yearAppend$year, mean, na.rm = T)})
