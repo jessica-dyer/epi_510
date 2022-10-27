@@ -40,14 +40,15 @@ boxplot(vipcls$bw ~ vipcls$over25,
 
 ##3. Look at relationship between smoking while pregnant and low birth weight.
 ##a. Produce a 2x2 table of smokeFirst and lbw.
-(rrSmokeLBWTable <- table(vipcls$smokeFirst, vipcls$lbw, deparse.level = 2))
+rrSmokeLBWTable <- table(vipcls$smokeFirst, vipcls$lbw, deparse.level = 2)
 
 ##b. Use the epi.2by2 function to estimate the crude RR for the association between smoking and low birth weight. What is the RR?
-(rrStratSmokeLBW <- epi.2by2(dat=rrSmokeLBWTable, method="cohort.count")) 
+rrStratSmokeLBW <- epi.2by2(dat=rrSmokeLBWTable, method="cohort.count")
 
 ##c. Use the epi.2by2 function to estimate the crude OR for the association between smoking and low birth weight. What is the OR? 
-(rrStratSmokeLBW <- epi.2by2(dat=rrSmokeLBWTable, method="cohort.count")) 
+rrStratSmokeLBW <- epi.2by2(dat=rrSmokeLBWTable, method="cohort.count")
 
 ##4. Determine if maternal age is either a confounder or effect modifier.
 ##a. Use epi.2by2 function to estimate the RR for the association between any smoking and low birth weight, adjusted for maternal age older than 25. What are the adjusted, crude, and stratum-specific RRs, and their 95% CIs? 
-(rrStratSmokeLBWage <- table(vipcls$smokeFirst, vipcls$LBW, vipcls$over25, deparse.level = 2))
+rrStratSmokeLBWage <- table(vipcls$smokeFirst, vipcls$lbw, vipcls$over25, deparse.level = 2)
+epi.2by2(dat = rrStratSmokeLBWage, method = "cohort.count")
