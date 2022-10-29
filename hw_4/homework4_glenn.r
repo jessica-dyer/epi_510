@@ -27,17 +27,20 @@ glimpse(vipcls)
 
 ##2. Explore distribution of birth weight
 ##a. Produce a histogram of the distribution of birth weight. 
+png("plots/histogram_birth_weights.png")
 hist(vipcls$bw, main = "Histogram of birth weights", xlab = "Birth weight in grams")
-
+dev.off()
 ##b. Produce a boxplot for birth weight grouped by categories of smokeFirst (use the 1/2 version).
+png("plots/boxplot_birth_weight.png")
 boxplot(vipcls$bw ~ vipcls$smokeFirst, 
         ylab = "Birth weight in grams", xlab = "Mother Smoked in First Trimester")
-
+dev.off()
 
 ##c. Produce a boxplot for birth weight grouped by categories of over25 (use the 1/2 version).
+png("plots/boxplot_birth_weight_over_25.png")
 boxplot(vipcls$bw ~ vipcls$over25, 
         ylab = "Birth weight in grams", xlab = "Mother >25 Years Old")
-
+dev.off()
 ##3. Look at relationship between smoking while pregnant and low birth weight.
 ##a. Produce a 2x2 table of smokeFirst and lbw.
 rrSmokeLBWTable <- table(vipcls$smokeFirst, vipcls$lbw, deparse.level = 2)
