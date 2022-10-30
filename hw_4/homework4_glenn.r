@@ -30,6 +30,7 @@ glimpse(vipcls)
 png("plots/histogram_birth_weights.png")
 hist(vipcls$bw, main = "Histogram of birth weights", xlab = "Birth weight in grams")
 dev.off()
+
 ##b. Produce a boxplot for birth weight grouped by categories of smokeFirst (use the 1/2 version).
 png("plots/boxplot_birth_weight.png")
 boxplot(vipcls$bw ~ vipcls$smokeFirst, 
@@ -41,6 +42,7 @@ png("plots/boxplot_birth_weight_over_25.png")
 boxplot(vipcls$bw ~ vipcls$over25, 
         ylab = "Birth weight in grams", xlab = "Mother >25 Years Old")
 dev.off()
+
 ##3. Look at relationship between smoking while pregnant and low birth weight.
 ##a. Produce a 2x2 table of smokeFirst and lbw.
 rrSmokeLBWTable <- table(vipcls$smokeFirst, vipcls$lbw, deparse.level = 2)
@@ -54,4 +56,22 @@ rrStratSmokeLBW <- epi.2by2(dat=rrSmokeLBWTable, method="cohort.count")
 ##4. Determine if maternal age is either a confounder or effect modifier.
 ##a. Use epi.2by2 function to estimate the RR for the association between any smoking and low birth weight, adjusted for maternal age older than 25. What are the adjusted, crude, and stratum-specific RRs, and their 95% CIs? 
 rrStratSmokeLBWage <- table(vipcls$smokeFirst, vipcls$lbw, vipcls$over25, deparse.level = 2)
-epi.2by2(dat = rrStratSmokeLBWage, method = "cohort.count")
+(rrStratSmokeLBWageObj <- epi.2by2(dat = rrStratSmokeLBWage, method = "cohort.count"))
+
+##b. Use the epi.2by2 function to estimate the OR for the association between any smoking and low birth weight, adjusted for maternal age older than 25. What are the adjusted, crude, and stratum-specific ORs, and their 95% CIs? 
+orStratSmokeLBWage <- table(vipcls$smokeFirst, vipcls$lbw, vipcls$over25, deparse.level = 2)
+(orStratSmokeLBWageObj <- epi.2by2(dat = orStratSmokeLBWage, method = "case.control"))
+
+##c. Based on the above analyses, would you consider maternal age a confounder?
+(crude <- rrStratSmokeLBWageObj$massoc.detail$RR.strata.wald)
+(adjusted <- rrStratSmokeLBWageObj$massoc.detail$RR.strata.wald)
+100*(adjusted - crude)/crude
+
+(crude <- orStratSmokeLBWageObj$massoc.detail$OR.strata.wald)
+(adjusted <- orStratSmokeLBWageObj$massoc.detail$OR.strata.wald)
+100*(adjusted - crude)/crude
+
+##d. Based on the above analyses, would you consider maternal age an effect modifier?  
+rrStratSmokeLBWageObj$massoc.detail$RR.strata.wald
+orStratSmokeLBWageObj$massoc.detail$OR.strata.wald
+
