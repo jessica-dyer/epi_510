@@ -57,7 +57,7 @@ is.na(BRFSSMerge$postalcode)
 glimpse(BRFSSMerge)
 View(BRFSSMerge)
 
-## 5. Drop unnecessary variables 
+## 5. Keep required variables 
 BRFSSMerge <- BRFSSMerge[, c("name", "postalcode", "X_STATE",  "X_PSU", "X_STSTR", "X_LLCPWT", "SEX", "X_AGEG5YR", "X_AGE65YR", "PHYSHLTH")]
 names(BRFSSMerge)
 
