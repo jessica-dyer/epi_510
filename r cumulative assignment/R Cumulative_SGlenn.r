@@ -18,7 +18,8 @@
 # Set-up session
 ## 1b. Clear session and set working directory
 rm(list = ls())
-wd <- "~/Repositories/epi_510/r cumulative"
+
+wd <- "~/Repositories/epi_510/r cumulative assignment/"
 setwd(wd)
 
 ## 2a. Load libraries
@@ -26,11 +27,20 @@ library(tidyverse)
 library(haven)
 
 ## 2b. Import data
-BRFSSXPT <- read_xpt("data/LLCP2017.XPT_")
-
-## 2c. Write BRFSS data into CSV and read CSV into r
-write_csv(BRFSSXPT, "BRFSS.csv")
-BRFSS <- read.csv("BRFSS.csv")
+if(!file.exists("data/BRFSS.csv")){
+  print("Reading xpt data and writing to csv")
+  BRFSSXPT <- read_xpt("data/LLCP2017.XPT_")
+  write_csv(BRFSSXPT, "data/BRFSS.csv")
+  BRFSS <- read.csv("data/BRFSS.csv")
+} else {
+  ## 2c. Write BRFSS data into CSV and read CSV into r
+  start_time <- Sys.time()
+  print("Loading csv data.")
+  BRFSS <- read.csv("data/BRFSS.csv")
+  end_time <- Sys.time()
+  time_diff <- end_time-start_time
+  print(time_diff)
+}
 
 # Clean up data
 ## 3a. Read in the fipsLink.csv file
