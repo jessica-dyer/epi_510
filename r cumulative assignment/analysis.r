@@ -31,5 +31,5 @@ summary(cleanBRFSSdata)
 
 # Missingness analysis
 png("data/missingness.png")
-vis_miss("brfss2017Clean.rds", warn_large_data = FALSE)
+vis_miss(cleanBRFSSdata, warn_large_data = FALSE)
 dev.off()

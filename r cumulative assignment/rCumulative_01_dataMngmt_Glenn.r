@@ -36,14 +36,13 @@ if(!file.exists("data/BRFSS.csv")){
   write_csv(BRFSSXPT, "data/BRFSS.csv")
   BRFSS <- read.csv("data/BRFSS.csv")
 } else {
-
-# 2c. Write BRFSS data into CSV and read CSV into r
-start_time <- Sys.time()
-print("Loading csv data.")
-BRFSS <- read.csv("data/BRFSS.csv")
-end_time <- Sys.time()
-time_diff <- end_time-start_time
-print(time_diff)
+  # 2c. Write BRFSS data into CSV and read CSV into r
+  start_time <- Sys.time()
+  print("Loading csv data.")
+  BRFSS <- read.csv("data/BRFSS.csv")
+  end_time <- Sys.time()
+  time_diff <- end_time-start_time
+  print(time_diff)
 }
 
 # Clean up data
