@@ -1,20 +1,24 @@
-## ---------------------------
+## -----------------------------------------------------------------------------
 ##
 ## Script name: EPI 510 R Cumulative Assignment - Data Management 
 ##
-## Purpose of script: R Cumulative Assignment data cleaning
+## Purpose of script: R Cumulative Assignment Data Cleaning
 ##
 ## Author: Susan Glenn
 ##
 ## Date Created: 2022-10-30
+## Last Date Modified: 2022-11- 
+## -----------------------------------------------------------------------------
+## 
+##  Notes: 
+##  1. Packages needed: tidyverse, haven, dplyr 
+##  2. Data management: brought in and cleaned up data. Data cleaning included: 
+##     connecting FIPS codes to each state, setting missing data to NA, 
+##     reducing to 10 necessary variables, renaming variables, and creating 
+##     logical and factor variables.
+##  3. Clean data was saved to "brfss2017Clean.rds" for analysis
 ##
-## Notes: 
-## 1. Data management: brought in and cleaned up data. Data cleaning included: 
-##    connecting FIPS codes to each state, setting missing data to NA, 
-##    reducing to 10 necessary variables, renaming variables, and creating 
-##    logical and factor variables.
-## 2. Clean data was saved to "brfss2017Clean.rds" for analysis
-## ---------------------------
+## -----------------------------------------------------------------------------
 
 
 # Set-up session
@@ -92,6 +96,7 @@ colnames(BRFSSMerge)[10] ="daysIll"
 # using 0/1 coding (0 = <15 days and 1 = 15+ days)
 BRFSSMerge$daysIll[BRFSSMerge$daysIll == 77] <- NA
 BRFSSMerge$daysIll[BRFSSMerge$daysIll == 99] <- NA
+BRFSSMerge$daysIll[BRFSSMerge$daysIll == 88] <- 0
 
 # Logical 
 BRFSSMerge$daysIllCat[BRFSSMerge$daysIll <15] <- 0
