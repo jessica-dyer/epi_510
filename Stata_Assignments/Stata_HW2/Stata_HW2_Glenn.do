@@ -1,7 +1,7 @@
 /*
 Author: Susan Glenn
 Date created: 18 November 2022
-Last modified: 
+Last modified: 21 November 2022
 
 Purpose: Epi 510 Stata Homework 2
 */
