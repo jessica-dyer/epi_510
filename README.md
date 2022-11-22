@@ -11,5 +11,3 @@
 - Change directory: `cd `
 - List files in folder: `ls ` 
 - Go up a level: `cd .. `
-
-
